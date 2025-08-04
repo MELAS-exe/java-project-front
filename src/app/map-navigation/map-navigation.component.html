@@ -1,0 +1,87 @@
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+  <div class="layout-container flex h-full grow flex-col">
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-10 py-4">
+      <div class="flex items-center gap-3 text-[var(--text-primary)]">
+        <div class="w-8 h-8 text-[var(--primary-color)]">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H22V22H4V4ZM26 4H44V22H26V4ZM4 26H22V44H4V26ZM26 26H44V44H26V26Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <h2 class="text-[var(--text-primary)] text-xl font-bold tracking-tight">Senegal Admin Buildings</h2>
+      </div>
+      <div class="flex flex-1 justify-end gap-6 items-center">
+        <nav class="flex items-center gap-8">
+          <a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-base font-medium transition-colors" routerLink="/">Accueil</a>
+          <a class="text-[var(--text-primary)] text-base font-semibold" routerLink="/map">Carte</a>
+          <a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-base font-medium transition-colors" routerLink="/add-building">Renseigner</a>
+        </nav>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden sm:block">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <input class="block w-full rounded-md border-gray-200 bg-gray-50 py-2 pl-10 pr-3 text-sm placeholder:text-gray-400 focus:border-[var(--primary-color)] focus:bg-white focus:ring-[var(--primary-color)]" placeholder="Rechercher" type="text"/>
+          </div>
+          <button class="flex items-center justify-center rounded-md border border-gray-200 h-10 w-10 text-gray-500 hover:bg-gray-100 transition-colors">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c1.355 0 2.707-.158 4.012-.463M12 21c-1.355 0-2.707-.158-4.012-.463m8.024-14.076a9.004 9.004 0 0 0-8.024-2.463m8.024 2.463a9.004 9.004 0 0 1 2.463 8.024m-2.463-8.024c.463 1.307.726 2.65.726 4.012A9.004 9.004 0 0 1 12 21c-1.362 0-2.705-.263-4.012-.726m8.024-14.076a9.004 9.004 0 0 0-2.463-8.024m-8.024 2.463A9.004 9.004 0 0 0 3 12c0 1.362.263 2.705.726 4.012m-2.463-8.024A9.004 9.004 0 0 1 12 3c1.362 0 2.705.263 4.012.726" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFgsLWNBc96ehAcbrozCPsYexL73H3CK-qNZDBjzlmNfyU1VX3Rpk9a7ObUjnryCzDY6U-bNWAGMa0XG-u-A7Te7HRZnAJ4Mr9SzyuIzB6e17O10a_l3ycAalufPa_Y6U5814q4eHyop5HGH1Xd9tP-luEeATpKZT8LnD2VVRiEzoJbmV5wVhydcA8BfoWIGDVB76ufnk5Ly2H6ALfhzTSONjf1eOlDmFUN0lciQls7BXFOuGc335RL1MiwONXcg4Q41rPfG3kXiA");'></div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 flex flex-row gap-4 p-4 lg:p-6">
+      <aside class="w-80 lg:w-96 flex flex-col gap-4">
+        <div class="bg-gray-50 rounded-lg p-4 h-full border border-gray-200">
+          <div class="relative mb-4">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <input class="block w-full rounded-md border-gray-200 bg-white py-2.5 pl-10 pr-3 text-sm placeholder:text-gray-400 focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" placeholder="Filtrer par nom ou type" type="text"/>
+          </div>
+          <h2 class="text-base font-semibold text-[var(--text-primary)] px-2 pb-2">Bâtiment sélectionné</h2>
+          <div class="space-y-3">
+            <div class="flex items-start gap-4 rounded-lg p-2 hover:bg-gray-100 cursor-pointer" (click)="selectBuilding(building)" *ngFor="let building of buildings">
+              <div class="flex items-center justify-center rounded-md bg-[var(--secondary-color)] text-[var(--primary-color)] shrink-0 size-10">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-[var(--text-primary)]">{{building.name}}</p>
+                <p class="text-sm text-[var(--text-secondary)]">Type: {{building.type}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <section class="flex-1 rounded-lg overflow-hidden relative shadow-lg">
+        <div id="map" class="h-full w-full"></div>
+        <div class="absolute top-4 right-4 flex flex-col gap-2">
+          <div class="flex flex-col rounded-md bg-white shadow-md">
+            <button class="flex size-10 items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-[var(--primary-color)] transition-colors rounded-t-md border-b border-gray-200" (click)="zoomIn()">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <button class="flex size-10 items-center justify-center text-gray-600 hover:bg-gray-100 hover:text-[var(--primary-color)] transition-colors rounded-b-md" (click)="zoomOut()">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.5 12h-15" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+          <button class="flex size-10 items-center justify-center rounded-md bg-white shadow-md text-gray-600 hover:bg-gray-100 hover:text-[var(--primary-color)] transition-colors" (click)="locateUser()">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L6 12Z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
