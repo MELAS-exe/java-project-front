@@ -1,0 +1,115 @@
+<div class="flex min-h-screen flex-col">
+  <header class="sticky top-0 z-10 w-full border-b border-[var(--border-color)] bg-[var(--background-color)]/80 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-4">
+        <svg class="h-8 w-8 text-[var(--primary-color)]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path clip-rule="evenodd" d="M12 2L3 8V22H9V14H15V22H21V8L12 2ZM7 10.19V20H5V9.42L12 4.5L19 9.42V20H17V12H7V10.19Z" fill-rule="evenodd"></path>
+        </svg>
+        <h1 class="text-xl font-bold tracking-tighter">Senegal Admin Buildings</h1>
+      </div>
+      <nav class="hidden items-center gap-6 md:flex">
+        <a class="nav-link text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)]" routerLink="/">Accueil</a>
+        <a class="nav-link text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)]" routerLink="/map">Structures</a>
+        <a class="nav-link active text-sm font-medium" routerLink="/add-building">{{ pageTitle }}</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button *ngIf="isAuthenticated" (click)="cancel()" class="btn btn-secondary">Annuler</button>
+      </div>
+    </div>
+  </header>
+  <main class="mx-auto w-full max-w-3xl flex-grow px-4 py-8 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">{{ pageTitle }}</h2>
+        <p class="mt-2 text-lg text-[var(--text-secondary)]">Remplissez le formulaire ci-dessous pour {{ isEditMode ? 'modifier' : 'recenser' }} une structure.</p>
+        <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          {{ errorMessage }}
+        </div>
+      </div>
+      <form class="space-y-6 rounded-lg border border-[var(--border-color)] bg-white p-6 shadow-sm" (ngSubmit)="onSubmit()" #structureForm="ngForm">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="structure-name">Nom de la structure</label>
+            <div class="mt-1">
+              <input class="form-input" id="structure-name" name="structureName" placeholder="Ex: Hôpital Principal de Dakar" type="text" [(ngModel)]="structureData.name" required/>
+            </div>
+          </div>
+          <div class="sm:col-span-1">
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="structure-type">Type de structure</label>
+            <div class="mt-1">
+              <select class="form-input" id="structure-type" name="structureType" [(ngModel)]="structureData.type" required>
+                <option value="" disabled>Sélectionner le type</option>
+                <option *ngFor="let type of structureTypes" [value]="type.value">{{ type.label }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="street">Adresse</label>
+            <div class="mt-1">
+              <input class="form-input" id="street" name="street" placeholder="Ex: Avenue Cheikh Anta Diop" type="text" [(ngModel)]="structureData.address.street" required/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="city">Ville</label>
+            <div class="mt-1">
+              <input class="form-input" id="city" name="city" placeholder="Ex: Dakar" type="text" [(ngModel)]="structureData.address.city" required/>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="region">Région</label>
+            <div class="mt-1">
+              <select class="form-input" id="region" name="region" [(ngModel)]="structureData.address.region" required>
+                <option value="" disabled>Sélectionner la région</option>
+                <option *ngFor="let region of senegalRegions" [value]="region">{{ region }}</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="postalCode">Code postal</label>
+            <div class="mt-1">
+              <input class="form-input" id="postalCode" name="postalCode" placeholder="Ex: 12500" type="text" [(ngModel)]="structureData.address.postalCode" required/>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="phone">Téléphone</label>
+            <div class="mt-1">
+              <input class="form-input" id="phone" name="phone" placeholder="Ex: +221 33 823 00 00" type="tel" [(ngModel)]="structureData.contact.phone" required/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[var(--text-primary)]" for="email">Email</label>
+            <div class="mt-1">
+              <input class="form-input" id="email" name="email" placeholder="Ex: contact@structure.sn" type="email" [(ngModel)]="structureData.contact.email" required/>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-[var(--text-primary)]" for="website">Site web (optionnel)</label>
+          <div class="mt-1">
+            <input class="form-input" id="website" name="website" placeholder="Ex: https://www.structure.sn" type="url" [(ngModel)]="structureData.contact.website"/>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-[var(--text-primary)]" for="description">Description (optionnel)</label>
+          <div class="mt-1">
+            <textarea class="form-input" id="description" name="description" placeholder="Décrivez les services proposés..." rows="4" [(ngModel)]="structureData.description"></textarea>
+          </div>
+        </div>
+        <!-- File upload section removed for now - can be added later -->
+        <div class="flex justify-between pt-4">
+          <button type="button" (click)="cancel()" class="btn btn-secondary" [disabled]="isLoading">Annuler</button>
+          <button class="btn btn-primary" type="submit" [disabled]="!canSubmit">
+            <span *ngIf="isLoading">Traitement...</span>
+            <span *ngIf="!isLoading">{{ submitButtonText }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
